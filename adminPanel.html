@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin">
+        <h1>Admin Name</h1>
+    </div>
+    <div class="container">
+        <input id="text-inp" type="text">
+        <select name="categories" id="categories">
+            <option selected disabled hidden>Category</option>
+            <option value="Fast food">Fast food</option>
+            <option value="BBQ">BBQ</option>
+            <option value="Starters">Starters</option>
+            <option value="Main course">Main course</option>
+            <option value="Desserts">Desserts</option>
+            <option value="Beverages">Beverages</option>
+        </select>
+        <input type="file" id="image" name="image" accept="image/*">  
+        <button class="btn addBtn">Add</button>  
+    </div>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="./bootstrap/js/jquery.js"></script>
+    <script src="adminPanel.js"></script>
+</body>
+</html>

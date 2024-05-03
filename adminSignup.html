@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign UP</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="alert alert-dismissible fade show" role="alert">
+    <strong><h4>Allready have account</h4></strong>
+    <button class="btn Signin-btn ">SignIn Now</button>    
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+    <div class="container shadow p-4 row col-sm-6 justify-content-md-center">
+     <form action="">
+       <div class="mb-3">
+               <h1 class="text-center mb-4">Signup</h1>
+               <label for="exampleInputEmail1" class="form-label">Email address</label>
+               <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+             </div>
+             <div class="mb-3">
+               <label for="exampleInputPassword1" class="form-label">Password</label>
+               <input type="password" class="form-control" id="password">
+             </div>
+             <button id="btn" type="button"  class="btn btn-primary justify-content-center">Submit</button>
+             <span> OR </span>
+             <img id="img" style="width: 60px;" src="./resources/google-logo.png" alt="">
+             <span>Sign In with Google</span>
+            </form>       
+     </div>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.js"></script>
+    <script type="module" src="app.js"></script>
+    <script type="module" src="adminAuth.js"></script>
+</body>
+</html>
