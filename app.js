@@ -15,8 +15,8 @@ if(adminSignUp){
 }
 
 //User
-let userSignUp = document.querySelector(".btn-In");
-let userSignin = document.querySelector(".btn-Up");
+let userSignUp = document.querySelector(".btn-Up");
+let userSignin = document.querySelector(".btn-In");
 
 if(userSignin){
     userSignin.addEventListener("click", () => {
