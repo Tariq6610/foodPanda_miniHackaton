@@ -9,24 +9,36 @@
 </head>
 <body>
     <div class="admin">
-        <h1>Admin Name</h1>
+        <h1 id="admin-name" class="text-center">Admin Name</h1>
+        <div id="email-btn">
+            <span id="log-email">Email </span><button id="logout-btn" class="btn ">Sign Out</button>
+        </div>
     </div>
+    <div class="inp-wrap">
+        <div  class="text-center m-4">
+            <input id="admin-inp" type="text" name="" placeholder="write the Admin name">
+        </div>
+        <div class="container">
+            <input id="add-item" type="text" placeholder="Add item">
+            <select name="categories" id="categories">
+                <option selected disabled hidden>Category</option>
+                <option value="Fast food">Fast food</option>
+                <option value="BBQ">BBQ</option>
+                <option value="Starters">Starters</option>
+                <option value="Main course">Main course</option>
+                <option value="Desserts">Desserts</option>
+                <option value="Beverages">Beverages</option>
+            </select>
+            <input type="file" id="image" name="image" accept="image/*">
+            <button id="addBtn" class="btn addBtn">Add</button>
+        </div>
+    </div>  
     <div class="container">
-        <input id="text-inp" type="text">
-        <select name="categories" id="categories">
-            <option selected disabled hidden>Category</option>
-            <option value="Fast food">Fast food</option>
-            <option value="BBQ">BBQ</option>
-            <option value="Starters">Starters</option>
-            <option value="Main course">Main course</option>
-            <option value="Desserts">Desserts</option>
-            <option value="Beverages">Beverages</option>
-        </select>
-        <input type="file" id="image" name="image" accept="image/*">  
-        <button class="btn addBtn">Add</button>  
+        <ul id="ul"></ul>
     </div>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
     <script src="./bootstrap/js/jquery.js"></script>
-    <script src="adminPanel.js"></script>
+    <script type="module" src="adminPanel.js"></script>
+    <script type="module" src="adminAuth.js"></script>
 </body>
 </html>
