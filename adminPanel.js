@@ -3,10 +3,14 @@ import {
   getFirestore,
   collection,
   addDoc,
-  getDocs,
+  getDoc,
   doc,
   setDoc,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import{
+  getAuth,
+  signOut,
+} from "./adminAuth.js"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -29,14 +33,35 @@ let adminInp = document.getElementById('admin-inp');
 let adminName = document.getElementById('admin-name');
 
 // Add documents
-try {
-  const docRef = await addDoc(collection(db, "users"), {
-    first: "Ada",
-    last: "Lovelace",
-    born: 1815
-  });
-  console.log("Document written with ID: ", docRef.id);
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
+// try {
+//   const docRef = await addDoc(collection(db, "users"), {
+//     first: "Ada",
+//     last: "Lovelace",
+//     born: 1815
+//   });
+//   console.log("Document written with ID: ", docRef.id);
+// } catch (e) {
+//   console.error("Error adding document: ", e);
+// }
 
+//logout
+let logoutbtn = document.getElementById("logout-btn");
+
+logoutbtn && logoutbtn.addEventListener("click", () => {
+  const auth = getAuth();
+  signOut(auth)
+    .then(() => {
+      console.log('Sign-out successful.')
+      window.location = "./adminSignin.html"
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+});
+
+export{
+  setDoc,
+  doc,
+  db,
+  getDoc,
+}

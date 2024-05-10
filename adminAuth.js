@@ -8,6 +8,12 @@ import {
   onAuthStateChanged,
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import{
+  setDoc,
+  doc,
+  db,
+  getDoc,
+} from './adminPanel.js'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -31,7 +37,7 @@ let authUser = () => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
-      window.location = "./adminSignIn.html";
+      // window.location = "./adminSignIn.html";
     })
     .catch((error) => {
       const errorMessage = error.message;
@@ -54,7 +60,7 @@ let sAuth = () => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
-      window.location = "./adminPanel.html";
+      // window.location = "./adminPanel.html";
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -78,7 +84,8 @@ google_login &&
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
         console.log(user);
-        window.location = "./adminPanel.html";
+        addUserToFirestore(user);
+        // window.location = "./adminPanel.html";
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -86,39 +93,45 @@ google_login &&
       });
   });
 
-// //Add user to firestore
-// let addUserToFirestoe = async (admin) => {
-//   const rest = await setDoc(doc(db, 'admins', admin.uid),{
 
-//   })
-// }
 
 let logemail = document.getElementById("log-email");
 let adminname = document.getElementById("admin-name");
 
 
 // onAuthstateChanged
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async(user) => {
   if (user) {
-    console.log("user---->", user);
-    logemail.innerHTML = user.email;
-    adminname.innerHTML = user.displayName;
+    const docRef = doc(db, "admins", user.uid);
+    const docSnap = await getDoc(docRef);
+    console.log("admin---->", docSnap.data());
+    if(docSnap.data){
+      if(location.pathname !== '/adminPanel.html'){
+        window.location = './adminPanel.html'
+      }
+      logemail.innerHTML = user.email;
+      adminname.innerHTML = user.displayName;
+    }
   } else {
+    if(location.pathname == '/adminPanel.html'){
+      window.location = './adminSignin.html'
+    }
     console.log("not login");
   }
 });
 
-//logout
-let logoutbtn = document.getElementById("logout-btn");
 
-logoutbtn && logoutbtn.addEventListener("click", () => {
-  const auth = getAuth();
-  signOut(auth)
-    .then(() => {
-      console.log('Sign-out successful.')
-      window.location = "./adminSignin.html"
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-});
+
+//Add user to firestore
+let addUserToFirestore = async (user) => {
+  const rest = await setDoc(doc(db, 'admins', user.uid),{
+    name: user.displayName,
+    email: user.email,
+    uid: user.uid
+  })
+}
+
+export{
+  getAuth,
+  signOut,
+}
