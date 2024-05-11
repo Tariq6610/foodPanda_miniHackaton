@@ -13,6 +13,7 @@ import{
   doc,
   db,
   getDoc,
+  updateAdminPanel,
 } from './adminPanel.js'
 
 // Your web app's Firebase configuration
@@ -37,7 +38,7 @@ let authUser = () => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
-      // window.location = "./adminSignIn.html";
+      window.location = "./adminSignIn.html";
     })
     .catch((error) => {
       const errorMessage = error.message;
@@ -60,7 +61,9 @@ let sAuth = () => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
-      // window.location = "./adminPanel.html";
+      if(!user){
+        addUserToFirestore(user)
+      }
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -84,8 +87,9 @@ google_login &&
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
         console.log(user);
-        addUserToFirestore(user);
-        // window.location = "./adminPanel.html";
+        if(!user){
+          addUserToFirestore(user);
+        }
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -105,12 +109,12 @@ onAuthStateChanged(auth, async(user) => {
     const docRef = doc(db, "admins", user.uid);
     const docSnap = await getDoc(docRef);
     console.log("admin---->", docSnap.data());
-    if(docSnap.data){
+    if(docSnap.data()){
       if(location.pathname !== '/adminPanel.html'){
         window.location = './adminPanel.html'
       }
       logemail.innerHTML = user.email;
-      adminname.innerHTML = user.displayName;
+      adminname.innerHTML = docSnap.data().name;
     }
   } else {
     if(location.pathname == '/adminPanel.html'){
@@ -129,9 +133,10 @@ let addUserToFirestore = async (user) => {
     email: user.email,
     uid: user.uid
   })
-}
+ }
 
 export{
   getAuth,
   signOut,
+  auth,
 }
