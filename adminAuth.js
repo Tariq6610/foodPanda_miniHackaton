@@ -16,6 +16,7 @@ import{
   updateAdminPanel,
 } from './adminPanel.js'
 
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDzrD8zBVXBKL7eCr6D8QXf_-aZJ7KOVfs",
@@ -58,11 +59,14 @@ let sPassword = document.querySelector("#sPassword");
 
 let sAuth = () => {
   signInWithEmailAndPassword(auth, sEmail.value, sPassword.value)
-    .then((userCredential) => {
+    .then(async(userCredential) => {
       const user = userCredential.user;
       console.log(user);
-      if(!user){
-        addUserToFirestore(user)
+      const docRef = doc(db, "admins", user.uid);
+      const docSnap = await getDoc(docRef);
+      if(!docSnap.data()){
+       await addUserToFirestore(user);
+        location.reload();
       }
     })
     .catch((error) => {
@@ -83,12 +87,15 @@ const provider = new GoogleAuthProvider();
 google_login &&
   google_login.addEventListener("click", () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async(result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
+        const docRef = doc(db, "admins", user.uid);
+        const docSnap = await getDoc(docRef);
         console.log(user);
-        if(!user){
-          addUserToFirestore(user);
+        if(!docSnap.data()){
+         await addUserToFirestore(user);
+          location.reload();
         }
       })
       .catch((error) => {
@@ -108,8 +115,10 @@ onAuthStateChanged(auth, async(user) => {
   if (user) {
     const docRef = doc(db, "admins", user.uid);
     const docSnap = await getDoc(docRef);
-    console.log("admin---->", docSnap.data());
+    console.log("admin---->", docSnap.data().uid);
     if(docSnap.data()){
+      // Storing UID in local storage
+      sessionStorage.setItem('currentUserUid', docSnap.data().uid); 
       if(location.pathname !== '/adminPanel.html'){
         window.location = './adminPanel.html'
       }

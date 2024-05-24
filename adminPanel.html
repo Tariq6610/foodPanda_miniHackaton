@@ -1,70 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="admin.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
     <div class="admin">
-        <div class="adminName-wrap">
-            <h1 id="admin-name" class="">Admin Name</h1>
-        </div>
+      <div class="adminName-wrap">
+        <h1 id="admin-name" class="">Admin Name</h1>
       </div>
-      <div id="email-btn">
-        <div id="log-email">Email </div>  
-          <button id="logout-btn" class="btn ">Sign Out</button>
+    </div>
+    <div id="email-btn">
+      <div id="log-email">Email</div>
+      <button id="logout-btn" class="btn mb-2">Sign Out</button>
+      <div class="d-flex justify-content-center gap-2">
+        <input
+          id="admin-inp"
+          type="text"
+          name=""
+          placeholder="Write/Update Admin name"
+          class="form-control"
+        />
+        <button id="nameUpdate" class="btn">Update</button>
       </div>
+    </div>
     <div class="inp-wrap">
-        <div  class="text-center m-4">
-            <input id="admin-inp" type="text" name="" placeholder="write the Admin name">
-            <button id="nameUpdate" class="btn">Update</button>
-        </div>
-        <div id="container-inp" class="container">
-            <input id="add-item" type="text" placeholder="Add item">
-            <select name="categories" id="categories">
-                <option selected disabled hidden>Category</option>
-                <option value="Fast food">Fast food</option>
-                <option value="BBQ">BBQ</option>
-                <option value="Starters">Starters</option>
-                <option value="Main course">Main course</option>
-                <option value="Desserts">Desserts</option>
-                <option value="Beverages">Beverages</option>
-            </select>
-            <input type="file" id="image" name="image" accept="image/*">
-            <button id="addBtn" class="btn addBtn">Add</button>
-        </div>
-    </div>  
+      <div id="container-inp" class="container">
+        <input id="add-item" class="form-control" type="text" placeholder="Add item" />
+        <input type="text" name="" id="price" placeholder="Price" />
+
+       
+      </div>
+      <div class="text-center ">
+        <select name="categories" id="categories">
+          <option selected disabled hidden>Category</option>
+          <option value="Fast food">Fast food</option>
+          <option value="BBQ">BBQ</option>
+          <option value="Starters">Starters</option>
+          <option value="Main course">Main course</option>
+          <option value="Desserts">Desserts</option>
+          <option value="Beverages">Beverages</option>
+        </select>
+        <input type="file" id="Input_image"  name="image" accept="image/*" />
+        <button id="addBtn" class="btn addBtn ">Add</button>
+      
+      </div>
+    </div>
     <div class="container table-responsive">
-      <h1 id="menu" class="text-center mt-4">Menu</h1>
-        <table class="table  table-success table-hover table-striped table-responsive align-middle">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">category</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td><button class="btn btn-secondary me-4">edit</button><button class="btn btn-danger">delete</button></td>
-              </tr>
-              <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td><button class="btn btn-secondary me-4">edit</button><button class="btn btn-danger">delete</button></td>
-              </tr>
- 
-            </tbody>
-          </table>
+      <h1 id="menu_heading" class="text-center mt-4">Menu</h1>
+      <table
+        class="table table-success table-hover table-striped table-responsive align-middle"
+      >
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">category</th>
+            <th scope="col">Prices</th>
+            <th scope="col">image</th>
+            <th scope="col">actions</th>
+          </tr>
+        </thead>
+        <tbody id="menu">
+          <!-- <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td></td>
+            <td>
+              <button class="btn btn-secondary me-4">edit</button
+              ><button class="btn btn-danger">delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td></td>
+            <td>
+              <button class="btn btn-secondary me-4">edit</button
+              ><button class="btn btn-danger">delete</button>
+            </td>
+          </tr> -->
+        </tbody>
+      </table> 
+        <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit item</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="modal_item" class="form-label">Add item</label>
+            <input type="text" class="form-control" id="modal_item" >
+          </div>
+          <label for="modal_price" class="form-label">Price</label>
+          <div class="mb-3 d-flex gap-4" >
+            <input type="text" class="form-control w-25" id="modal_price">
+          <select name="categories"  id="modal_categories">
+            <option selected disabled hidden>Category</option>
+            <option value="Fast food">Fast food</option>
+            <option value="BBQ">BBQ</option>
+            <option value="Starters">Starters</option>
+            <option value="Main course">Main course</option>
+            <option value="Desserts">Desserts</option>
+            <option value="Beverages">Beverages</option>
+          </select>
+          <input type="file" id="modal-Input_image" class="mt-2"  name="image" accept="image/*" />
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="save_changes" data-bs-dismiss="modal" class="btn btn-primary abc2">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- <button id="upload_file">upload file</button> -->
     </div>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
     <script src="./bootstrap/js/jquery.js"></script>
     <script type="module" src="adminPanel.js"></script>
     <script type="module" src="adminAuth.js"></script>
-</body>
+  </body>
 </html>
