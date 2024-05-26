@@ -1,6 +1,7 @@
 //Admin
 let adminSignin = document.querySelector(".Signin-btn");
 let adminSignUp = document.querySelector(".Signup-btn");
+let homeBtn = document.getElementById('homeBtn');
 
 if(adminSignin){
     adminSignin.addEventListener("click", () => {
@@ -29,3 +30,7 @@ if(userSignUp){
       window.location.href = "./userSignup.html";
     });
 } 
+
+homeBtn && homeBtn.addEventListener('click', ()=>{
+  window.location.href = "./index.html"
+})

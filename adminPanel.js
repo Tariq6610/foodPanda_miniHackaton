@@ -19,7 +19,7 @@ import {
   ref,
   uploadBytesResumable,
   getDownloadURL,
-} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
+} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -35,7 +35,7 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
-const storage = getStorage();
+const storage = getStorage(app);
 
 let addItem = document.getElementById("add-item");
 let category = document.getElementById("categories");
@@ -126,7 +126,9 @@ console.log("current User Uid", currentUserUid);
 let getData = async () => {
   const ref = query(collection(db, currentUserUid));
   const unsubscribe = onSnapshot(ref, (querySnapshot) => {
-    menu.innerHTML = "";
+   if (menu){
+     menu.innerHTML = "";
+   
     querySnapshot.forEach((doc) => {
       menu.innerHTML += `          <tr>
     <td>${doc.data().item}</td>
@@ -143,6 +145,7 @@ let getData = async () => {
     </td>
   </tr>`;
     });
+  }
     // Now that the DOM has been updated, we can get the elements by class name
     let clss = document.getElementsByClassName("abc1");
     let clss2 = document.getElementsByClassName("abc2");
@@ -213,8 +216,8 @@ let uploadToStorage = (file, docUid) => {
     console.log();
     const storageRef = ref(
       storage,
-      `admin/${currentUserUid}/${docUid}${fileName}.jpeg`
-      // `admin/${currentUserUid}/${docUid}${fileName.slice(fileName.lastIndexOf("."))}`
+      // `admin/${currentUserUid}/${docUid}${fileName}.jpeg`
+      `admin/${currentUserUid}/${docUid}${fileName.slice(fileName.lastIndexOf("."))}`
     );
     const uploadTask = uploadBytesResumable(storageRef, file);
 

@@ -1,11 +1,18 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+import{
+  setDoc,
+  doc,
+  getDoc,
+  getFirestore,
+} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,6 +27,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+
 
 let authUser = () => {
   let email = document.getElementById("email").value;
@@ -34,7 +43,7 @@ let authUser = () => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(error);
+      console.log(errorMessage);
     });
 };
 
@@ -50,10 +59,15 @@ let sPassword = document.querySelector("#sPassword");
 
 let sAuth = () => {
   signInWithEmailAndPassword(auth, sEmail.value, sPassword.value)
-    .then((userCredential) => {
+    .then(async(userCredential) => {
       const user = userCredential.user;
       console.log(user);
-      window.location.href = "./dashboard.html";
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      if(!docSnap.data()){
+       await addUserToFirestore(user);
+        location.reload();
+      }
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -70,17 +84,55 @@ if (sbtn) {
 let google_login = document.querySelector("#img");
 auth.languageCode = "en";
 const provider = new GoogleAuthProvider();
-google_login.addEventListener("click", () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const user = result.user;
-      console.log(user);
-      window.location.href = "./dashboard.html";
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage);
-    });
+google_login &&
+  google_login.addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+      .then(async(result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        console.log(user);
+        if(!docSnap.data()){
+         await addUserToFirestore(user);
+          location.reload();
+        }
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  });
+
+// onAuthstateChanged
+onAuthStateChanged(auth, async(user) => {
+  if (user) {
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+    console.log("users---->", docSnap.data().uid);
+    if(docSnap.data()){
+      // Storing UID in local storage
+      sessionStorage.setItem('currentUserUid', docSnap.data().uid); 
+      if(location.pathname !== '/userPanel.html'){
+        window.location = './userPanel.html'
+      }
+      logemail.innerHTML = user.email;
+      adminname.innerHTML = docSnap.data().name;
+    }
+  } else {
+    if(location.pathname == '/userPanel.html'){
+      window.location = './userSignin.html'
+    }
+    console.log("not login");
+  }
 });
+
+
+//Add user to firestore
+let addUserToFirestore = async (user) => {
+  const rest = await setDoc(doc(db, 'users', user.uid),{
+    name: user.displayName,
+    email: user.email,
+    uid: user.uid
+  })
+ }
