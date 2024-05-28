@@ -120,10 +120,11 @@ logoutbtn &&
 
 // Retrieving UID from local storage
 const currentUserUid = sessionStorage.getItem("currentUserUid");
-console.log("current User Uid", currentUserUid);
+// console.log("current User Uid", currentUserUid);
 
 //get realTime data
 let getData = async () => {
+  if(currentUserUid){
   const ref = query(collection(db, currentUserUid));
   const unsubscribe = onSnapshot(ref, (querySnapshot) => {
    if (menu){
@@ -150,8 +151,8 @@ let getData = async () => {
     let clss = document.getElementsByClassName("abc1");
     let clss2 = document.getElementsByClassName("abc2");
     let save_changes = document.getElementById("save_changes");
-    console.log(`Number of elements with class 'abc1': ${clss.length}`);
-    console.log(`Number of elements with class 'abc2': ${clss2.length}`);
+    // console.log(`Number of elements with class 'abc1': ${clss.length}`);
+    // console.log(`Number of elements with class 'abc2': ${clss2.length}`);
 
     // Optional: log the text content of each element
     //Delete button
@@ -206,6 +207,7 @@ let getData = async () => {
       };
     }
   });
+}
 };
 
 
@@ -270,4 +272,4 @@ let getModalValues = async () => {
 
 getData();
 
-export { setDoc, doc, db, getDoc, updateAdminPanel };
+export { setDoc, doc, db, getDoc, getDocs, collection, query, onSnapshot, where };

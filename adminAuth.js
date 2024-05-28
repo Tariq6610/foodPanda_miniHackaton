@@ -13,7 +13,6 @@ import{
   doc,
   db,
   getDoc,
-  updateAdminPanel,
 } from './adminPanel.js'
 
 
