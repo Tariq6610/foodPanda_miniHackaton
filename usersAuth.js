@@ -5,7 +5,8 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  onAuthStateChanged,
+  onAuthStateChanged, 
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
 import{
   setDoc,
@@ -135,4 +136,9 @@ let addUserToFirestore = async (user) => {
     email: user.email,
     uid: user.uid
   })
+ }
+
+ export{
+  getAuth, 
+  signOut
  }

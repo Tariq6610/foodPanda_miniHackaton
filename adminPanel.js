@@ -218,7 +218,6 @@ let uploadToStorage = (file, docUid) => {
     console.log();
     const storageRef = ref(
       storage,
-      // `admin/${currentUserUid}/${docUid}${fileName}.jpeg`
       `admin/${currentUserUid}/${docUid}${fileName.slice(fileName.lastIndexOf("."))}`
     );
     const uploadTask = uploadBytesResumable(storageRef, file);

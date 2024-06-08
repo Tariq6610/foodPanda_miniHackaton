@@ -6,6 +6,7 @@ import {
   doc,
   onSnapshot,
 } from "./adminPanel.js";
+import { getAuth, signOut } from "./usersAuth.js";
 
 let getData = async () => {
   const q = query(collection(db, "admins"));
@@ -22,7 +23,7 @@ let getData = async () => {
           Our restaurant offers gourmet dishes made from fresh ingredients, with options ranging from succulent steaks to exquisite vegan meals..</p>
           <button id="${
             doc.data().uid
-          }" class="btn btn-primary Restaurants">Check dishes</button>
+          }" class="btn btn-primary Restaurants">View dishes</button>
         </div>
       </div> 
         `;
@@ -38,5 +39,21 @@ let getData = async () => {
     };
   }
 };
+
+//logout
+let logoutbtn = document.getElementById("user-logout");
+
+logoutbtn &&
+  logoutbtn.addEventListener("click", () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful.");
+        window.location = "./userSignin.html";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
 getData();

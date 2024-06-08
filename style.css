@@ -124,10 +124,12 @@ h1{
 #delete{
     background-color: #fff;
     font-size: larger;
+    cursor: pointer;
 }
 
 #delete:active{
     font-size: large;
+    cursor: pointer
 }
 
 .qty{
@@ -145,6 +147,15 @@ h1{
     border-radius: 11px;
 }
 
+#btnIn{
+    border: 1px solid white;
+    font-weight: bold;
+    color: white;
+}
 
+#btnIn:hover{
+    background-color: white;
+    color: #e21b70;
+}
 
 
