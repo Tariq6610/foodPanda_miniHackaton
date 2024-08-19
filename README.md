@@ -5,7 +5,7 @@
 
 # FoodPanda Mini Hackathon
 
-**Published Link:** [FoodPanda Mini Hackathon](https://tariq6610.github.io/foodPanda_miniHackaton/)
+**Published Link:** [FoodPanda Mini Hackathon](https://food-panda-mini-hackaton.vercel.app/)
 
 ## Overview
 
