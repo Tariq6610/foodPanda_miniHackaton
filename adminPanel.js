@@ -45,6 +45,18 @@ let price = document.getElementById("price");
 let menu = document.getElementById("menu");
 let file = document.getElementById("Input_image");
 
+
+// Edit Admin
+const EditEdmin = document.querySelector(".editAdmin")
+const firstNav = document.querySelector(".firstNav")
+
+EditEdmin && EditEdmin.addEventListener("click", ()=>{
+  firstNav.classList.toggle("overlay")
+  console.log("hello");
+  
+})
+
+
 // Add documents
 addBtn &&
   addBtn.addEventListener("click", async () => {
@@ -139,8 +151,8 @@ let getData = async () => {
     <img id="image" src="${doc.data().image}" alt="image">
     </td>
     <td>
-    <button class='abc1 btn btn-danger' id="${doc.data().index}">Delete</button>
-    <button class="abc2 btn btn-secondary" data-bs-toggle='modal' data-bs-target='#exampleModal' id="${
+    <button class='abc1 btn btn-danger mb-1' id="${doc.data().index}">Delete</button>
+    <button class="abc2 btn btn-secondary mb-1" data-bs-toggle='modal' data-bs-target='#exampleModal' id="${
       doc.data().index
     }" >edit</button
     </td>

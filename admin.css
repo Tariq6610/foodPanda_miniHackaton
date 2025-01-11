@@ -4,7 +4,7 @@
 }
 
 .admin{
-    height: 100px;
+    height: 60px;
     width: 100vw;
     background-color: #e21b70;
     display: flex;
@@ -12,6 +12,63 @@
     justify-content: center;
     align-items: center;
     color: white;
+    position: relative;
+    min-width: 516px;
+}
+
+.editAdmin{
+    position: absolute;
+    right: 50px;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
+.editAdmin:hover{
+    background-color: #94194e;
+}
+
+.firstNav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
+    padding: 20px;
+    min-height: 200px;
+  width: 100%;
+   top: 240px;
+   background:black;
+   background:rgba(87, 84, 84, 0.8);
+   backdrop-filter: blur(5px);
+   transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out;
+   opacity: 0;
+   
+ 
+}
+
+.navCont{
+ display: flex;
+ flex-wrap: wrap;
+}
+
+.overlay{
+    top: 270px;
+    opacity: 1;
+
+}
+
+#secondNav{
+    min-width: 516px;
+}
+
+#logout-btn{
+    padding: 5px 10px;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    
 }
 
 .adminName-wrap{
@@ -95,7 +152,7 @@ font-weight: bold;
 }
 
 #admin-inp{
-    width: 300px;
+    width: 200px;
     height: 40px;
     border-radius: 15px;
     padding: 20px;
@@ -127,4 +184,14 @@ input[type="file"]{
 
 #image{
     width: 100px;
+}
+
+.table{
+    min-width: 516px;
+}
+
+@media (max-width:600px) {
+    .navCont{
+        flex-direction: column;
+    }
 }

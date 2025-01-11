@@ -6,51 +6,83 @@
     <title>Admin Panel</title>
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
-    <div class="admin">
-      <div class="adminName-wrap">
-        <h1 id="admin-name" class="">Admin Name</h1>
+    <nav>
+
+
+
+      <div class="admin">
+        <div class="adminName-wrap">
+          <h1 id="admin-name" class="">Admin Name</h1>
+        </div>
+        <div class="editAdmin">
+          <i class="fa-solid fa-pen-to-square" style="color: #edeff3;"></i>
+        </div>
+        
+        <nav  class=" firstNav">
+          <button id="logout-btn" class="btn">Sign Out</button>
+          <div class="navCont">
+            <div class="">
+  
+              <div class="d-flex flex-wrap flex-md-row gap-4 align-items-center flex-column" >
+                <input id="profile_img" type="file" name="" id="" class="mt-2 mx-2">
+                <input class="form-control me-2"  id="admin-inp" type="search"  placeholder="Write/Update Admin name" aria-label="Search">
+                <button class="btn btn-outline-success"  id="nameUpdate" type="button">Update</button>
+              </div>
+            </div>
+          </div>
+        </nav>
       </div>
-    </div>
-    <div id="email-btn">
-      <div id="log-email">Email</div>
-      <button id="logout-btn" class="btn mb-2">Sign Out</button>
-      <div class="d-flex justify-content-center gap-2">
-        <input
-          id="admin-inp"
-          type="text"
-          name=""
-          placeholder="Write/Update Admin name"
-          class="form-control"
-        />
-        <input id="profile_img" type="file" name="" id="" class="mt-2">
-        <button id="nameUpdate" class="btn">Update</button>
+
+
+       <!-- <div id="email-btn">
+        <button id="logout-btn" class="btn mb-2">Sign Out</button>
+        <div class="d-flex justify-content-center gap-2">
+          <input
+            id="admin-inp"
+            type="text"
+            name=""
+            placeholder="Write/Update Admin name"
+            class="form-control"
+          />
+          <input id="profile_img" type="file" name="" id="" class="mt-2">
+          <button id="nameUpdate" class="btn">Update</button>
+        </div>
       </div>
-    </div>
-    <div class="inp-wrap">
-      <div id="container-inp" class="container">
+      <div class="inp-wrap">
+        <div id="container-inp" class="container">
+          <input id="add-item" class="form-control" type="text" placeholder="Add item" />
+          <input type="text" name="" id="price" placeholder="Price" />  -->
+  
+
+
+
+    </nav>
+
+
+    <div id="secondNav" class="inp-wrap d-flex flex-column">
+      <div id="container-inp" class="container d-flex flex-column flex-md-row">
         <input id="add-item" class="form-control" type="text" placeholder="Add item" />
         <input type="text" name="" id="price" placeholder="Price" />
-
-       
-      </div>
-      <div class="text-center ">
-        <select name="categories" id="categories">
-          <option selected disabled hidden>Category</option>
-          <option value="Fast food">Fast food</option>
-          <option value="BBQ">BBQ</option>
-          <option value="Starters">Starters</option>
-          <option value="Main course">Main course</option>
-          <option value="Desserts">Desserts</option>
-          <option value="Beverages">Beverages</option>
-        </select>
-        <input type="file" id="Input_image"  name="image" accept="image/*" />
-        <button id="addBtn" class="btn addBtn ">Add</button>
-      
+        <div class="text-center gap-2 d-flex flex-column flex-md-row">
+          <select name="categories" id="categories">
+            <option selected disabled hidden>Category</option>
+            <option value="Fast food">Fast food</option>
+            <option value="BBQ">BBQ</option>
+            <option value="Starters">Starters</option>
+            <option value="Main course">Main course</option>
+            <option value="Desserts">Desserts</option>
+            <option value="Beverages">Beverages</option>
+          </select>
+          <input type="file" id="Input_image"  name="image" accept="image/*" />
+          <button id="addBtn" class="btn addBtn ">Add</button>
+        
+        </div>
       </div>
     </div>
-    <div class="container table-responsive">
+    <div class="container  overflow-scroll table">
       <h1 id="menu_heading" class="text-center mt-4">Menu</h1>
       <table
         class="table table-success table-hover table-striped table-responsive align-middle"

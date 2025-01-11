@@ -121,8 +121,10 @@ onAuthStateChanged(auth, async(user) => {
       if(location.pathname !== '/adminPanel.html'){
         window.location = './adminPanel.html'
       }
-      logemail.innerHTML = user.email;
-      adminname.innerHTML = docSnap.data().name;
+      if(adminname){
+        // logemail.innerHTML = user.email;
+        adminname.innerHTML = docSnap.data().name;
+      }
     }
   } else {
     if(location.pathname == '/adminPanel.html'){
